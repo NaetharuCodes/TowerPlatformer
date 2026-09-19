@@ -1,42 +1,45 @@
 extends CharacterBody2D
 
-enum ActionState {IDLE, WALK, DUCK, FLOAT, JUMP, LOOK_UP}
-var actionState: ActionState = ActionState.IDLE
+# Movements
+@export var max_speed: float = 200.0
+@export var acceleration: float = 1200.0
+@export var friction: float = 2000.0
 
-@onready var sprite = $AnimatedSprite2D
+# Air
+@export var air_acceleration: float = 400.0
+@export var air_friction: float = 200.0
+@export var gravity: float = 1000.0
+@export var max_fall_speed: float = 400.0
 
-const SPEED: float = 300.0
-const JUMP_VELOCITY: float = -400.0
+# Jump
+@export var jump_power: float = 400.0
 
 func _physics_process(delta: float) -> void:
-
+	
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			velocity.y -= jump_power
+			print("I jump")
+	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
-		
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		
-	var direction := Input.get_axis("move_left", "move_right")
+		velocity.y += gravity * delta
+		velocity.y = min(velocity.y, max_fall_speed)
 	
-	if direction != 0:
-		sprite.flip_h = direction < 0
+	var direction = Input.get_axis("move_left", "move_right")
 	
-	if direction:
-		velocity.x = direction * SPEED
+	var accel
+	var decel
+	
+	if is_on_floor():
+		accel = acceleration
+		decel = friction
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
+		accel = air_acceleration
+		decel = air_friction
 	
-func _update_animation():
-	match(actionState):
-		ActionState.IDLE:
-			sprite.play("idle")
-		ActionState.WALK:
-			sprite.play("walk")
-		ActionState.DUCK:
-			sprite.play("duck")
-		ActionState.FLOAT:
-			sprite.play("float")
-		ActionState.LOOK_UP:
-			sprite.play("look_up")
+	if direction == 0:
+		velocity.x = move_toward(velocity.x, max_speed * direction, decel * delta)
+	else:
+		velocity.x = move_toward(velocity.x, max_speed * direction, accel * delta)
+		
+	move_and_slide()
