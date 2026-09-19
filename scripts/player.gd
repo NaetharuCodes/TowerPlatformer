@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+enum Facing {LEFT, RIGHT}
+var facing: Facing = Facing.LEFT
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # Movements
@@ -15,12 +18,25 @@ extends CharacterBody2D
 
 # Jump
 @export var jump_power: float = 400.0
+@export var wall_push: float = 150.0
+var wall_jump_tokens: int = 1
 
 func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
+		wall_jump_tokens = 1
+		
 		if Input.is_action_just_pressed("jump"):
 			velocity.y -= jump_power
+			
+	if is_on_wall() and not is_on_floor():
+		if Input.is_action_just_pressed("jump") and wall_jump_tokens > 0:
+			wall_jump_tokens -= 1
+			velocity.y -= jump_power  * 0.75
+			if facing == Facing.LEFT:
+				velocity.x += wall_push
+			else:
+				velocity.x -= wall_push
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -30,8 +46,10 @@ func _physics_process(delta: float) -> void:
 	
 	if direction < 0:
 		sprite.flip_h = true
+		facing = Facing.LEFT
 	elif direction > 0:
 		sprite.flip_h = false
+		facing = Facing.RIGHT
 	
 	var accel
 	var decel

@@ -1,0 +1,83 @@
+[gd_scene format=4 uid="uid://dh4ynao3uvrnl"]
+
+[ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="1_6ivci"]
+[ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="2_h320y"]
+[ext_resource type="Texture2D" uid="uid://dpxgk0176y3yi" path="res://assets/sprites/tiles.png" id="3_xf1sy"]
+[ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="4_a64th"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(16, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(16, 358)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a64th"]
+texture = ExtResource("3_xf1sy")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_kuroa"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 6
+sources/0 = SubResource("TileSetAtlasSource_a64th")
+
+[node name="Sandbox" type="Node2D" unique_id=322420430]
+
+[node name="World" type="Node" parent="." unique_id=862244062]
+
+[node name="Background" type="TextureRect" parent="World" unique_id=951725831]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_6ivci")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World" unique_id=397614720]
+
+[node name="Control" type="Control" parent="World/CanvasLayer" unique_id=234851373]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI-Frame" type="TextureRect" parent="World/CanvasLayer/Control" unique_id=321604833]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_h320y")
+
+[node name="Viewports" type="Node" parent="." unique_id=99179476]
+
+[node name="LeftSVPContainer" type="SubViewportContainer" parent="Viewports" unique_id=165843992]
+offset_right = 288.0
+offset_bottom = 360.0
+
+[node name="SubViewportLeft" type="SubViewport" parent="Viewports/LeftSVPContainer" unique_id=226570705]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(288, 360)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1219212091]
+position = Vector2(144, 180)
+
+[node name="StaticWalls" type="StaticBody2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D" unique_id=1604038606]
+
+[node name="LeftWall" type="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=1369356032]
+position = Vector2(-136, 0)
+shape = SubResource("RectangleShape2D_kuroa")
+
+[node name="RightWall" type="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=460001964]
+position = Vector2(136, 0)
+shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1686413324]
+tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAA=")
+tile_set = SubResource("TileSet_kuroa")
+
+[node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("4_a64th")]
+position = Vector2(135, 264)
