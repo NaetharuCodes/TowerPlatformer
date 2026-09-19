@@ -23,7 +23,7 @@ var facing: Facing = Facing.LEFT
 @export var wall_push: float = 150.0
 var wall_jump_tokens: int = 1
 
-@export var float_speed: float = 20.0
+@export var float_speed: float = 100.0
 
 func _physics_process(delta: float) -> void:
 	
