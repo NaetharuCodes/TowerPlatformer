@@ -1,0 +1,41 @@
+[gd_scene format=4 uid="uid://dh4ynao3uvrnl"]
+
+[ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="1_6ivci"]
+[ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="2_h320y"]
+[ext_resource type="Texture2D" uid="uid://dpxgk0176y3yi" path="res://assets/sprites/tiles.png" id="3_xf1sy"]
+[ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="4_a64th"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a64th"]
+texture = ExtResource("3_xf1sy")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_kuroa"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 6
+sources/0 = SubResource("TileSetAtlasSource_a64th")
+
+[node name="Sandbox" type="Node2D" unique_id=322420430]
+
+[node name="Background" type="TextureRect" parent="." unique_id=951725831]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6ivci")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1686413324]
+tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAARABYAAAAAAAAAAAARABUAAAAAAAAAAAARABQAAAAAAAAAAAARABMAAAAAAAAAAAARABIAAAAAAAAAAAARABEAAAAAAAAAAAARABAAAAAAAAAAAAARAA8AAAAAAAAAAAARAA4AAAAAAAAAAAARAA0AAAAAAAAAAAARAAwAAAAAAAAAAAARAAsAAAAAAAAAAAARAAoAAAAAAAAAAAARAAkAAAAAAAAAAAARAAgAAAAAAAAAAAARAAcAAAAAAAAAAAAAABYAAAAAAAAAAAAAABUAAAAAAAAAAAAAABQAAAAAAAAAAAAAABMAAAAAAAAAAAAAABIAAAAAAAAAAAAAABEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_kuroa")
+
+[node name="Player" parent="." unique_id=1515628199 instance=ExtResource("4_a64th")]
+position = Vector2(135, 264)
+
+[node name="UI-Frame" type="TextureRect" parent="." unique_id=321604833]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_h320y")
