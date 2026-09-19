@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 # Movements
 @export var max_speed: float = 200.0
 @export var acceleration: float = 1200.0
@@ -19,13 +21,17 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y -= jump_power
-			print("I jump")
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		velocity.y = min(velocity.y, max_fall_speed)
 	
 	var direction = Input.get_axis("move_left", "move_right")
+	
+	if direction < 0:
+		sprite.flip_h = true
+	elif direction > 0:
+		sprite.flip_h = false
 	
 	var accel
 	var decel
