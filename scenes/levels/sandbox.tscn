@@ -5,6 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dpxgk0176y3yi" path="res://assets/sprites/tiles.png" id="3_xf1sy"]
 [ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="4_a64th"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(16, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(16, 358)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a64th"]
 texture = ExtResource("3_xf1sy")
 0:0/0 = 0
@@ -28,14 +34,46 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_6ivci")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1686413324]
-tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAARABYAAAAAAAAAAAARABUAAAAAAAAAAAARABQAAAAAAAAAAAARABMAAAAAAAAAAAARABIAAAAAAAAAAAARABEAAAAAAAAAAAARABAAAAAAAAAAAAARAA8AAAAAAAAAAAARAA4AAAAAAAAAAAARAA0AAAAAAAAAAAARAAwAAAAAAAAAAAARAAsAAAAAAAAAAAARAAoAAAAAAAAAAAARAAkAAAAAAAAAAAARAAgAAAAAAAAAAAARAAcAAAAAAAAAAAAAABYAAAAAAAAAAAAAABUAAAAAAAAAAAAAABQAAAAAAAAAAAAAABMAAAAAAAAAAAAAABIAAAAAAAAAAAAAABEAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_kuroa")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=397614720]
 
-[node name="Player" parent="." unique_id=1515628199 instance=ExtResource("4_a64th")]
-position = Vector2(135, 264)
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=234851373]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="UI-Frame" type="TextureRect" parent="." unique_id=321604833]
+[node name="UI-Frame" type="TextureRect" parent="CanvasLayer/Control" unique_id=321604833]
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("2_h320y")
+
+[node name="LeftSVPContainer" type="SubViewportContainer" parent="." unique_id=165843992]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportLeft" type="SubViewport" parent="LeftSVPContainer" unique_id=226570705]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(288, 360)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="LeftSVPContainer/SubViewportLeft" unique_id=1219212091]
+position = Vector2(144, 180)
+
+[node name="StaticWalls" type="StaticBody2D" parent="LeftSVPContainer/SubViewportLeft/Camera2D" unique_id=1604038606]
+
+[node name="LeftWall" type="CollisionShape2D" parent="LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=1369356032]
+position = Vector2(-136, 0)
+shape = SubResource("RectangleShape2D_kuroa")
+
+[node name="RightWall" type="CollisionShape2D" parent="LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=460001964]
+position = Vector2(136, 0)
+shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="LeftSVPContainer/SubViewportLeft" unique_id=1686413324]
+tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAA=")
+tile_set = SubResource("TileSet_kuroa")
+
+[node name="Player" parent="LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("4_a64th")]
+position = Vector2(135, 264)
