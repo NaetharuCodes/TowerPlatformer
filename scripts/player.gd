@@ -18,8 +18,12 @@ var facing: Facing = Facing.LEFT
 
 # Jump
 @export var jump_power: float = 400.0
+
+# Special Moves
 @export var wall_push: float = 150.0
 var wall_jump_tokens: int = 1
+
+@export var float_speed: float = 20.0
 
 func _physics_process(delta: float) -> void:
 	
@@ -40,7 +44,10 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		velocity.y = min(velocity.y, max_fall_speed)
+		if Input.is_action_pressed("jump"):
+			velocity.y = min(velocity.y, float_speed)
+		else:
+			velocity.y = min(velocity.y, max_fall_speed)
 	
 	var direction = Input.get_axis("move_left", "move_right")
 	
