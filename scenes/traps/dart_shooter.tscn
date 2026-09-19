@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://di1wfyuu6i0bi"]
+
+[ext_resource type="Texture2D" uid="uid://bwsb8vctog1m5" path="res://assets/sprites/dart_shooter.png" id="1_b1535"]
+[ext_resource type="Script" uid="uid://d04fc7vlna8de" path="res://scripts/dart_shooter.gd" id="1_yjtbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54d2l"]
+size = Vector2(72, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjtbf"]
+atlas = ExtResource("1_b1535")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhi2t"]
+atlas = ExtResource("1_b1535")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nn74p"]
+atlas = ExtResource("1_b1535")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kuroa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjtbf")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhi2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn74p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhi2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn74p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhi2t")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="DartShooter" type="Area2D" unique_id=2143644452]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_yjtbf")
+rate_of_fire = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1101334259]
+position = Vector2(28, 0)
+shape = SubResource("RectangleShape2D_54d2l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=61292308]
+sprite_frames = SubResource("SpriteFrames_kuroa")
+animation = &"shoot"
+frame = 4
+frame_progress = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

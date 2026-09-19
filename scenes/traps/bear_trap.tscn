@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://o4w6m4l3rb4j"]
+
+[ext_resource type="Script" uid="uid://c3fgm47018gb6" path="res://scripts/bear_trap.gd" id="1_itaaf"]
+[ext_resource type="Texture2D" uid="uid://bn05u4xg0kvml" path="res://assets/sprites/bear_trap.png" id="2_8md6y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvy04"]
+size = Vector2(14, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvy04"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77748"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r500n"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1pqd"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84m70"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj225"]
+atlas = ExtResource("2_8md6y")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77748"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvy04")
+}],
+"loop": 1,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77748")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r500n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1pqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84m70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj225")
+}],
+"loop": 0,
+"name": &"snap",
+"speed": 15.0
+}]
+
+[node name="BearTrap" type="Area2D" unique_id=71900557]
+script = ExtResource("1_itaaf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1539905076]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_wvy04")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=114772967]
+sprite_frames = SubResource("SpriteFrames_77748")
+animation = &"snap"
+frame = 3
+frame_progress = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

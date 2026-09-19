@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dh78xuf268ekv"]
+
+[ext_resource type="Script" uid="uid://ckr5rnfcadiur" path="res://scripts/buzz_saw.gd" id="1_m0wrp"]
+[ext_resource type="Texture2D" uid="uid://bbfu834lax66e" path="res://assets/sprites/traps-Sheet.png" id="2_sir16"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwt10"]
+radius = 4.0
+height = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w013l"]
+atlas = ExtResource("2_sir16")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ythet"]
+atlas = ExtResource("2_sir16")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kuroa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w013l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ythet")
+}],
+"loop": 1,
+"name": &"buzz",
+"speed": 5.0
+}]
+
+[node name="BuzzSaw" type="Area2D" unique_id=912959823]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_m0wrp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1312215665]
+position = Vector2(0, 8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_bwt10")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1369876407]
+sprite_frames = SubResource("SpriteFrames_kuroa")
+animation = &"buzz"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

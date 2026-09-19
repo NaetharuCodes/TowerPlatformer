@@ -2,8 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="1_6ivci"]
 [ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="2_h320y"]
+[ext_resource type="Script" uid="uid://l312bg2bmyp0" path="res://scripts/camera_2d.gd" id="3_b4sxl"]
 [ext_resource type="Texture2D" uid="uid://dpxgk0176y3yi" path="res://assets/sprites/tiles.png" id="3_xf1sy"]
 [ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="4_a64th"]
+[ext_resource type="PackedScene" uid="uid://cxli2vjwvvs5h" path="res://scenes/win_zone.tscn" id="6_qm7gn"]
+[ext_resource type="PackedScene" uid="uid://dh78xuf268ekv" path="res://scenes/traps/buzz_saw.tscn" id="7_ea3gy"]
+[ext_resource type="PackedScene" uid="uid://o4w6m4l3rb4j" path="res://scenes/traps/bear_trap.tscn" id="8_harsw"]
+[ext_resource type="PackedScene" uid="uid://di1wfyuu6i0bi" path="res://scenes/traps/dart_shooter.tscn" id="9_uq7s3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
 size = Vector2(16, 360)
@@ -26,6 +31,9 @@ texture = ExtResource("3_xf1sy")
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_a64th")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjtbf"]
+size = Vector2(143, 17)
 
 [node name="Sandbox" type="Node2D" unique_id=322420430]
 
@@ -62,8 +70,10 @@ handle_input_locally = false
 size = Vector2i(288, 360)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1219212091]
+[node name="Camera2D" type="Camera2D" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1219212091 node_paths=PackedStringArray("player")]
 position = Vector2(144, 180)
+script = ExtResource("3_b4sxl")
+player = NodePath("../Player")
 
 [node name="StaticWalls" type="StaticBody2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D" unique_id=1604038606]
 
@@ -81,3 +91,26 @@ tile_set = SubResource("TileSet_kuroa")
 
 [node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("4_a64th")]
 position = Vector2(135, 264)
+
+[node name="WinZone" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1097767784 instance=ExtResource("6_qm7gn")]
+position = Vector2(16, 1)
+
+[node name="BuzzSaw" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=912959823 instance=ExtResource("7_ea3gy")]
+position = Vector2(168, 201)
+
+[node name="BuzzSaw2" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1573138333 instance=ExtResource("7_ea3gy")]
+position = Vector2(200, 201)
+
+[node name="BearTrap" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=71900557 instance=ExtResource("8_harsw")]
+position = Vector2(56, 344)
+collision_layer = 4
+collision_mask = 2
+
+[node name="DartShooter" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=2143644452 instance=ExtResource("9_uq7s3")]
+position = Vector2(23, 216)
+
+[node name="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/DartShooter" index="0" unique_id=1101334259]
+position = Vector2(65.5, 0.5)
+shape = SubResource("RectangleShape2D_yjtbf")
+
+[editable path="Viewports/LeftSVPContainer/SubViewportLeft/DartShooter"]
