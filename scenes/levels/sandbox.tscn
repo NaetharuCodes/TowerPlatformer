@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dh78xuf268ekv" path="res://scenes/traps/buzz_saw.tscn" id="7_ea3gy"]
 [ext_resource type="PackedScene" uid="uid://o4w6m4l3rb4j" path="res://scenes/traps/bear_trap.tscn" id="8_harsw"]
 [ext_resource type="PackedScene" uid="uid://di1wfyuu6i0bi" path="res://scenes/traps/dart_shooter.tscn" id="9_uq7s3"]
+[ext_resource type="PackedScene" uid="uid://bq30vhte25a5n" path="res://scenes/traps/pendulum.tscn" id="10_fer5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
 size = Vector2(16, 360)
@@ -71,6 +72,7 @@ size = Vector2i(288, 360)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1219212091 node_paths=PackedStringArray("player")]
+texture_filter = 1
 position = Vector2(144, 180)
 script = ExtResource("3_b4sxl")
 player = NodePath("../Player")
@@ -90,6 +92,8 @@ tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAA
 tile_set = SubResource("TileSet_kuroa")
 
 [node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("4_a64th")]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(135, 264)
 
 [node name="WinZone" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1097767784 instance=ExtResource("6_qm7gn")]
@@ -106,11 +110,18 @@ position = Vector2(56, 344)
 collision_layer = 4
 collision_mask = 2
 
-[node name="DartShooter" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=2143644452 instance=ExtResource("9_uq7s3")]
+[node name="DartShooter" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=2143644452 node_paths=PackedStringArray("viewport") instance=ExtResource("9_uq7s3")]
 position = Vector2(23, 216)
+viewport = NodePath("..")
 
 [node name="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/DartShooter" index="0" unique_id=1101334259]
 position = Vector2(65.5, 0.5)
 shape = SubResource("RectangleShape2D_yjtbf")
+
+[node name="Pendulum" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=399202886 instance=ExtResource("10_fer5g")]
+z_index = 1
+position = Vector2(168, 225)
+collision_layer = 4
+swing_angle = 90.0
 
 [editable path="Viewports/LeftSVPContainer/SubViewportLeft/DartShooter"]

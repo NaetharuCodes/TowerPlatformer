@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bwsb8vctog1m5" path="res://assets/sprites/dart_shooter.png" id="1_b1535"]
 [ext_resource type="Script" uid="uid://d04fc7vlna8de" path="res://scripts/dart_shooter.gd" id="1_yjtbf"]
+[ext_resource type="PackedScene" uid="uid://ccbvkub87gpd6" path="res://scenes/traps/dart.tscn" id="2_lhi2t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54d2l"]
 size = Vector2(72, 14)
@@ -54,6 +55,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_yjtbf")
 rate_of_fire = 5.0
+dart = ExtResource("2_lhi2t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1101334259]
 position = Vector2(28, 0)
