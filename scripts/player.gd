@@ -4,6 +4,9 @@ class_name Player
 enum Facing {LEFT, RIGHT}
 var facing: Facing = Facing.LEFT
 
+enum ActionState {IDLE, WALK, JUMP, DUCK, LOOK_UP, FLOAT}
+var action_state = ActionState.WALK 
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # Movements
@@ -29,6 +32,8 @@ var wall_jump_tokens: int = 1
 func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
+		action_state = ActionState.WALK
+		
 		wall_jump_tokens = 1
 		
 		if Input.is_action_just_pressed("jump"):
@@ -47,9 +52,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 		if Input.is_action_pressed("jump"):
 			velocity.y = min(velocity.y, float_speed)
+			action_state = ActionState.FLOAT
 		else:
 			velocity.y = min(velocity.y, max_fall_speed)
-	
+			action_state = ActionState.JUMP
+			
+			
 	var direction = Input.get_axis("move_left", "move_right")
 	
 	if direction < 0:
@@ -75,3 +83,24 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, max_speed * direction, accel * delta)
 		
 	move_and_slide()
+	
+	if Input.is_action_pressed("look_up") and direction == 0:
+		action_state = ActionState.LOOK_UP
+		
+	if Input.is_action_pressed("look_down") and direction == 0:
+		action_state = ActionState.DUCK
+	
+	_update_animation()
+
+func _update_animation() -> void:
+	match(action_state):
+		ActionState.WALK:
+			sprite.play("walk")
+		ActionState.JUMP:
+			sprite.play("jump")
+		ActionState.FLOAT:
+			sprite.play("float")
+		ActionState.LOOK_UP:
+			sprite.play("look_up")
+		ActionState.DUCK:
+			sprite.play("duck")
