@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://c0qkguveh3wap"]
+
+[ext_resource type="Script" uid="uid://c3gonooa2caop" path="res://scenes/mechanisms/crumble_block.gd" id="1_7uhh3"]
+[ext_resource type="Texture2D" uid="uid://d2wr4mgqqeewg" path="res://assets/sprites/crumble_block-Sheet.png" id="1_8arhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uhh3"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h87ak"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym7fs"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdmnr"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyswl"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jh3l6"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsbn0"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tohq"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fm7x"]
+atlas = ExtResource("1_8arhl")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kuroa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uhh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h87ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym7fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdmnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyswl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jh3l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsbn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tohq")
+}],
+"loop": 0,
+"name": &"crumble",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fm7x")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(15.5, 16.5)
+
+[node name="CrumbleBlock" type="StaticBody2D" unique_id=1479334379]
+collision_mask = 6
+script = ExtResource("1_7uhh3")
+
+[node name="BlockCollision" type="CollisionShape2D" parent="." unique_id=18973347]
+shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=165570087]
+sprite_frames = SubResource("SpriteFrames_kuroa")
+animation = &"crumble"
+
+[node name="CrumbleZone" type="Area2D" parent="." unique_id=216929885]
+collision_mask = 2
+
+[node name="ZoneCollision" type="CollisionShape2D" parent="CrumbleZone" unique_id=890988636]
+position = Vector2(0.25, -0.75)
+shape = SubResource("RectangleShape2D_kuroa")
+
+[connection signal="body_entered" from="CrumbleZone" to="." method="_on_crumble_zone_body_entered"]

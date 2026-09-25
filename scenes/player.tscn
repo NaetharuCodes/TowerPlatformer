@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://imo26y0uxqsm" path="res://assets/sprites/wizard.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bd6dpi4mfk5e2" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://bvoflykaqi51q" path="res://assets/sounds/856639__malikmohamed0000__8-bit-jump.wav" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -110,5 +111,11 @@ animation = &"walk"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242493755]
+texture_filter = 1
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_u8vuu")
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=2143215202]
+stream = ExtResource("3_qhqgy")
+volume_db = -19.739
+pitch_scale = 1.74

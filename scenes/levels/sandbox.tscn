@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="1_6ivci"]
 [ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="2_h320y"]
-[ext_resource type="Script" uid="uid://l312bg2bmyp0" path="res://scripts/camera_2d.gd" id="3_b4sxl"]
+[ext_resource type="Script" uid="uid://l312bg2bmyp0" path="res://scripts/level/camera_2d.gd" id="3_b4sxl"]
 [ext_resource type="Texture2D" uid="uid://dpxgk0176y3yi" path="res://assets/sprites/tiles.png" id="3_xf1sy"]
 [ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="4_a64th"]
 [ext_resource type="PackedScene" uid="uid://cxli2vjwvvs5h" path="res://scenes/win_zone.tscn" id="6_qm7gn"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://o4w6m4l3rb4j" path="res://scenes/traps/bear_trap.tscn" id="8_harsw"]
 [ext_resource type="PackedScene" uid="uid://di1wfyuu6i0bi" path="res://scenes/traps/dart_shooter.tscn" id="9_uq7s3"]
 [ext_resource type="PackedScene" uid="uid://bq30vhte25a5n" path="res://scenes/traps/pendulum.tscn" id="10_fer5g"]
+[ext_resource type="PackedScene" uid="uid://c6ttwsns7mj1x" path="res://scenes/lava.tscn" id="11_swuqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
 size = Vector2(16, 360)
@@ -37,6 +38,10 @@ sources/0 = SubResource("TileSetAtlasSource_a64th")
 size = Vector2(143, 17)
 
 [node name="Sandbox" type="Node2D" unique_id=322420430]
+
+[node name="WinZone2" parent="." unique_id=1097767784 instance=ExtResource("6_qm7gn")]
+z_index = 3
+position = Vector2(577, -201)
 
 [node name="World" type="Node" parent="." unique_id=862244062]
 
@@ -88,7 +93,7 @@ position = Vector2(136, 0)
 shape = SubResource("RectangleShape2D_hqo0w")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1686413324]
-tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAABABYAAAAAAAAAAAACABYAAAAAAAAAAAADABYAAAAAAAAAAAAEABYAAAAAAAAAAAAFABYAAAAAAAAAAAAGABYAAAAAAAAAAAAHABYAAAAAAAAAAAAIABYAAAAAAAAAAAAJABYAAAAAAAAAAAAKABYAAAAAAAAAAAALABYAAAAAAAAAAAAMABYAAAAAAAAAAAANABYAAAAAAAAAAAAOABYAAAAAAAAAAAAPABYAAAAAAAAAAAAQABYAAAAAAAAAAAAQABMAAAAAAAAAAAAPABMAAAAAAAAAAAAOABMAAAAAAAAAAAANABMAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAABAAAAAAADABAAAAACAAAAAAAKAA0AAAACAAAAAAALAA0AAAADAAAAAAAMAA0AAAABAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAABAAAAAAAOAAkAAAACAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAACAAUAAAACAAAAAAADAAUAAAACAAAAAAAEAAUAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_kuroa")
 
 [node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("4_a64th")]
@@ -96,8 +101,8 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(135, 264)
 
-[node name="WinZone" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1097767784 instance=ExtResource("6_qm7gn")]
-position = Vector2(16, 1)
+[node name="WinZone" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=755962483 instance=ExtResource("6_qm7gn")]
+position = Vector2(16, 0)
 
 [node name="BuzzSaw" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=912959823 instance=ExtResource("7_ea3gy")]
 position = Vector2(168, 201)
@@ -121,7 +126,18 @@ shape = SubResource("RectangleShape2D_yjtbf")
 [node name="Pendulum" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=399202886 instance=ExtResource("10_fer5g")]
 z_index = 1
 position = Vector2(168, 225)
-collision_layer = 4
 swing_angle = 90.0
+
+[node name="BuzzSaw3" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1073425240 instance=ExtResource("7_ea3gy")]
+position = Vector2(200, 137)
+
+[node name="Pendulum2" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=901025396 instance=ExtResource("10_fer5g")]
+position = Vector2(73, 95)
+swing_speed = 3.0
+swing_angle = 30.0
+
+[node name="Lava" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1135130999 instance=ExtResource("11_swuqm")]
+position = Vector2(143, 620)
+move_speed = 10.0
 
 [editable path="Viewports/LeftSVPContainer/SubViewportLeft/DartShooter"]

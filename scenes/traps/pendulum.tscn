@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bq30vhte25a5n"]
 
 [ext_resource type="Texture2D" uid="uid://cnkmmxiavmiwn" path="res://assets/sprites/pendulum.png" id="1_26ist"]
-[ext_resource type="Script" uid="uid://k2bo0j30aprp" path="res://scripts/pendulum.gd" id="1_k55sm"]
+[ext_resource type="Script" uid="uid://k2bo0j30aprp" path="res://scripts/traps/pendulum.gd" id="1_k55sm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqo0w"]
 radius = 1.0

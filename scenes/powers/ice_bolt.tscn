@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://8o4wqyvcflgr"]
+
+[ext_resource type="Script" uid="uid://gwhurmbsx5iy" path="res://scripts/ice_bolt.gd" id="1_yqmgq"]
+[ext_resource type="Texture2D" uid="uid://3rjmimrqsvo0" path="res://assets/sprites/ice_bolt.png" id="2_dq6g4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62lxc"]
+radius = 6.0
+
+[node name="IceBolt" type="Area2D" unique_id=1470224442]
+script = ExtResource("1_yqmgq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=303892575]
+shape = SubResource("CircleShape2D_62lxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2098643233]
+position = Vector2(-1, 0)
+texture = ExtResource("2_dq6g4")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1505087400]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

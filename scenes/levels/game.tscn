@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://d12tqsxeob37n"]
+
+[ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="2_a1osm"]
+[ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="3_limtx"]
+[ext_resource type="Script" uid="uid://l312bg2bmyp0" path="res://scripts/level/camera_2d.gd" id="4_7rg7d"]
+[ext_resource type="PackedScene" uid="uid://duloldhoggaxe" path="res://scenes/levels/level_one.tscn" id="4_a1osm"]
+[ext_resource type="PackedScene" uid="uid://bv4xwqemgsnuq" path="res://scenes/player.tscn" id="5_limtx"]
+[ext_resource type="AudioStream" uid="uid://b01xeivh1t63w" path="res://assets/sounds/Level 1-1.mp3" id="6_limtx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(16, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(16, 358)
+
+[node name="Game" type="Node2D" unique_id=322420430]
+
+[node name="World" type="Node" parent="." unique_id=862244062]
+
+[node name="Background" type="TextureRect" parent="World" unique_id=951725831]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_a1osm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World" unique_id=397614720]
+
+[node name="Control" type="Control" parent="World/CanvasLayer" unique_id=234851373]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI-Frame" type="TextureRect" parent="World/CanvasLayer/Control" unique_id=321604833]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("3_limtx")
+
+[node name="Viewports" type="Node" parent="." unique_id=99179476]
+
+[node name="LeftSVPContainer" type="SubViewportContainer" parent="Viewports" unique_id=165843992]
+offset_right = 288.0
+offset_bottom = 360.0
+
+[node name="SubViewportLeft" type="SubViewport" parent="Viewports/LeftSVPContainer" unique_id=226570705]
+transparent_bg = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(288, 360)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1219212091 node_paths=PackedStringArray("player")]
+texture_filter = 1
+position = Vector2(144, 180)
+script = ExtResource("4_7rg7d")
+player = NodePath("../Player")
+
+[node name="StaticWalls" type="StaticBody2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D" unique_id=1604038606]
+
+[node name="LeftWall" type="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=1369356032]
+position = Vector2(-136, 0)
+shape = SubResource("RectangleShape2D_kuroa")
+
+[node name="RightWall" type="CollisionShape2D" parent="Viewports/LeftSVPContainer/SubViewportLeft/Camera2D/StaticWalls" unique_id=460001964]
+position = Vector2(136, 0)
+shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="LevelOne" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1829633845 instance=ExtResource("4_a1osm")]
+position = Vector2(144, 356)
+
+[node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("5_limtx")]
+texture_filter = 1
+position = Vector2(89, 27)
+
+[node name="RightSVPC" type="SubViewportContainer" parent="Viewports" unique_id=104727210]
+offset_left = 352.0
+offset_top = 1.0
+offset_right = 640.0
+offset_bottom = 361.0
+
+[node name="SubViewportRight" type="SubViewport" parent="Viewports/RightSVPC" unique_id=155348177]
+transparent_bg = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(288, 360)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Viewports/RightSVPC/SubViewportRight" unique_id=1008322487 node_paths=PackedStringArray("player")]
+texture_filter = 1
+position = Vector2(144, 180)
+script = ExtResource("4_7rg7d")
+player = NodePath("../Player")
+
+[node name="StaticWalls" type="StaticBody2D" parent="Viewports/RightSVPC/SubViewportRight/Camera2D" unique_id=43750628]
+
+[node name="LeftWall" type="CollisionShape2D" parent="Viewports/RightSVPC/SubViewportRight/Camera2D/StaticWalls" unique_id=2088299549]
+position = Vector2(-136, 0)
+shape = SubResource("RectangleShape2D_kuroa")
+
+[node name="RightWall" type="CollisionShape2D" parent="Viewports/RightSVPC/SubViewportRight/Camera2D/StaticWalls" unique_id=999415264]
+position = Vector2(136, 0)
+shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="LevelOne" parent="Viewports/RightSVPC/SubViewportRight" unique_id=771323877 instance=ExtResource("4_a1osm")]
+position = Vector2(144, 316)
+
+[node name="Player" parent="Viewports/RightSVPC/SubViewportRight" unique_id=9579175 instance=ExtResource("5_limtx")]
+position = Vector2(194, 226)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1793981946]
+stream = ExtResource("6_limtx")
+autoplay = true
+
+[editable path="Viewports/RightSVPC/SubViewportRight/LevelOne"]

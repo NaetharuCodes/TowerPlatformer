@@ -5,11 +5,12 @@ enum Facing {LEFT, RIGHT}
 var facing: Facing = Facing.LEFT
 
 enum ActionState {IDLE, WALK, JUMP, DUCK, LOOK_UP, FLOAT}
-var action_state = ActionState.WALK 
+var action_state: ActionState = ActionState.WALK
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var jump_audio: AudioStreamPlayer2D = $JumpAudio
 
-# Movements
+# Movement
 @export var max_speed: float = 200.0
 @export var acceleration: float = 1200.0
 @export var friction: float = 2000.0
@@ -23,77 +24,111 @@ var action_state = ActionState.WALK
 # Jump
 @export var jump_power: float = 400.0
 
-# Special Moves
+# Wall jump
 @export var wall_push: float = 150.0
 var wall_jump_tokens: int = 1
 
+# Float
 @export var float_speed: float = 100.0
+@export var max_float_time: float = 0.5
+@export var float_acceleration: float = 800.0
+@export var float_friction: float = 600.0
+var float_timer: float = 0.0
+
+# Idle
+@export var idle_delay: float = 3.0
+var idle_timer: float = 0.0
+
 
 func _physics_process(delta: float) -> void:
-	
+	# On the floor: reset abilities and allow jumping
 	if is_on_floor():
 		action_state = ActionState.WALK
-		
 		wall_jump_tokens = 1
-		
+		float_timer = max_float_time
+
 		if Input.is_action_just_pressed("jump"):
-			velocity.y -= jump_power
+			velocity.y = -jump_power
+			print("playing jump audio")
+			jump_audio.pitch_scale = randf_range(1.6, 1.9)
+			jump_audio.play()
 			
+
+	# Wall jump: fixed height, pushed away from the wall
 	if is_on_wall() and not is_on_floor():
 		if Input.is_action_just_pressed("jump") and wall_jump_tokens > 0:
 			wall_jump_tokens -= 1
-			velocity.y -= jump_power  * 0.75
-			if facing == Facing.LEFT:
-				velocity.x += wall_push
-			else:
-				velocity.x -= wall_push
-	
+			velocity.y = -jump_power * 0.75
+			velocity.x = get_wall_normal().x * wall_push
+			jump_audio.pitch_scale = randf_range(1.6, 1.9)
+			jump_audio.play()
+
+	# In the air: gravity, and float only while falling
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		if Input.is_action_pressed("jump"):
+
+		var falling: bool = velocity.y > 0
+		if falling and Input.is_action_pressed("jump") and float_timer > 0:
+			float_timer -= delta
 			velocity.y = min(velocity.y, float_speed)
 			action_state = ActionState.FLOAT
 		else:
 			velocity.y = min(velocity.y, max_fall_speed)
 			action_state = ActionState.JUMP
-			
-			
-	var direction = Input.get_axis("move_left", "move_right")
-	
+
+	# Facing
+	var direction: float = Input.get_axis("move_left", "move_right")
+
 	if direction < 0:
 		sprite.flip_h = true
 		facing = Facing.LEFT
 	elif direction > 0:
 		sprite.flip_h = false
 		facing = Facing.RIGHT
-	
-	var accel
-	var decel
-	
+
+	# Horizontal movement
+	var accel: float
+	var decel: float
+
 	if is_on_floor():
 		accel = acceleration
 		decel = friction
+	elif action_state == ActionState.FLOAT:
+		accel = float_acceleration
+		decel = float_friction
 	else:
 		accel = air_acceleration
 		decel = air_friction
-	
+
 	if direction == 0:
-		velocity.x = move_toward(velocity.x, max_speed * direction, decel * delta)
+		velocity.x = move_toward(velocity.x, 0, decel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, max_speed * direction, accel * delta)
-		
+
 	move_and_slide()
-	
-	if Input.is_action_pressed("look_up") and direction == 0:
-		action_state = ActionState.LOOK_UP
-		
-	if Input.is_action_pressed("look_down") and direction == 0:
-		action_state = ActionState.DUCK
-	
+
+	# Look up / duck (floor only)
+	if is_on_floor() and direction == 0:
+		if Input.is_action_pressed("look_up"):
+			action_state = ActionState.LOOK_UP
+		if Input.is_action_pressed("look_down"):
+			action_state = ActionState.DUCK
+
+	# Idle after standing still for a while
+	if is_on_floor() and velocity == Vector2.ZERO and action_state == ActionState.WALK:
+		idle_timer += delta
+		if idle_timer >= idle_delay:
+			action_state = ActionState.IDLE
+	else:
+		idle_timer = 0.0
+
 	_update_animation()
 
+
 func _update_animation() -> void:
-	match(action_state):
+	match action_state:
+		ActionState.IDLE:
+			sprite.play("idle")
 		ActionState.WALK:
 			sprite.play("walk")
 		ActionState.JUMP:
@@ -104,3 +139,7 @@ func _update_animation() -> void:
 			sprite.play("look_up")
 		ActionState.DUCK:
 			sprite.play("duck")
+
+
+func die() -> void:
+	print("i died")

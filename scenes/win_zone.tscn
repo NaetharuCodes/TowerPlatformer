@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxli2vjwvvs5h"]
 
 [ext_resource type="Texture2D" uid="uid://da1lqb3jbibsl" path="res://assets/sprites/win_zone.png" id="1_q11my"]
-[ext_resource type="Script" uid="uid://dyla6y1mpa4y6" path="res://scripts/win_zone.gd" id="1_r87n5"]
+[ext_resource type="Script" uid="uid://dyla6y1mpa4y6" path="res://scripts/level/win_zone.gd" id="1_r87n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
 size = Vector2(256, 128)

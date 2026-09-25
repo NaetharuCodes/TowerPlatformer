@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c6ttwsns7mj1x"]
+
+[ext_resource type="Texture2D" uid="uid://cm52iu87kx24m" path="res://assets/sprites/lava-flow.png" id="1_a5s42"]
+[ext_resource type="Script" uid="uid://bd8a3v0tpdqa5" path="res://scripts/level/lava.gd" id="1_dw3wf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(256, 512)
+
+[node name="Lava" type="Area2D" unique_id=1135130999]
+z_index = 1
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_dw3wf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062128857]
+texture = ExtResource("1_a5s42")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=90192681]
+shape = SubResource("RectangleShape2D_kuroa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dh78xuf268ekv"]
 
-[ext_resource type="Script" uid="uid://ckr5rnfcadiur" path="res://scripts/buzz_saw.gd" id="1_m0wrp"]
+[ext_resource type="Script" uid="uid://ckr5rnfcadiur" path="res://scripts/traps/buzz_saw.gd" id="1_m0wrp"]
 [ext_resource type="Texture2D" uid="uid://bbfu834lax66e" path="res://assets/sprites/traps-Sheet.png" id="2_sir16"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwt10"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://di1wfyuu6i0bi"]
 
 [ext_resource type="Texture2D" uid="uid://bwsb8vctog1m5" path="res://assets/sprites/dart_shooter.png" id="1_b1535"]
-[ext_resource type="Script" uid="uid://d04fc7vlna8de" path="res://scripts/dart_shooter.gd" id="1_yjtbf"]
+[ext_resource type="Script" uid="uid://d04fc7vlna8de" path="res://scripts/traps/dart_shooter.gd" id="1_yjtbf"]
 [ext_resource type="PackedScene" uid="uid://ccbvkub87gpd6" path="res://scenes/traps/dart.tscn" id="2_lhi2t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54d2l"]
