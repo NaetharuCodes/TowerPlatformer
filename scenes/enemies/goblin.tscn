@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dd34i40mhtscy"]
+
+[ext_resource type="Texture2D" uid="uid://0vb68qc4k1wc" path="res://assets/sprites/goblin-Sheet.png" id="1_0rrhd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeoui"]
+atlas = ExtResource("1_0rrhd")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fydqd"]
+atlas = ExtResource("1_0rrhd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_en706"]
+atlas = ExtResource("1_0rrhd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24y0p"]
+atlas = ExtResource("1_0rrhd")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kuroa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeoui")
+}],
+"loop": 1,
+"name": &"frozen",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fydqd")
+}],
+"loop": 1,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_en706")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_24y0p")
+}],
+"loop": 1,
+"name": &"thaw",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(10, 14)
+
+[node name="Goblin" type="CharacterBody2D" unique_id=542388747]
+collision_layer = 4
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=365006176]
+sprite_frames = SubResource("SpriteFrames_kuroa")
+animation = &"normal"
+frame_progress = 0.31166127
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=662146644]
+position = Vector2(0, 1.0000002)
+shape = SubResource("RectangleShape2D_hqo0w")

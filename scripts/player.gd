@@ -39,9 +39,19 @@ var float_timer: float = 0.0
 @export var idle_delay: float = 3.0
 var idle_timer: float = 0.0
 
+# Ice Bolts
+@export var ice_bolt: PackedScene
+@export var ice_bolt_delay: float = 2.0
+var ice_bolt_timer = 0.0
+
 
 func _physics_process(delta: float) -> void:
-	# On the floor: reset abilities and allow jumping
+	_move(delta)
+	_update_animation()
+	_shoot_ice_bolt(delta)
+
+func _move(delta: float) -> void:
+		# On the floor: reset abilities and allow jumping
 	if is_on_floor():
 		action_state = ActionState.WALK
 		wall_jump_tokens = 1
@@ -122,9 +132,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		idle_timer = 0.0
 
-	_update_animation()
-
-
 func _update_animation() -> void:
 	match action_state:
 		ActionState.IDLE:
@@ -140,6 +147,21 @@ func _update_animation() -> void:
 		ActionState.DUCK:
 			sprite.play("duck")
 
-
 func die() -> void:
 	print("i died")
+
+func _shoot_ice_bolt(delta: float) -> void:
+	
+	if ice_bolt_timer > 0:
+		ice_bolt_timer -= delta
+		return
+	
+	if Input.is_action_just_pressed("ice_bolt"):
+	
+		ice_bolt_timer = ice_bolt_delay
+		
+		var bolt = ice_bolt.instantiate()
+		bolt.direction = Vector2.RIGHT if facing == Facing.RIGHT else Vector2.LEFT
+		bolt.global_position = global_position
+		get_parent().add_child(bolt)
+		

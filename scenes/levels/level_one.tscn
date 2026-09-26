@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cxli2vjwvvs5h" path="res://scenes/win_zone.tscn" id="6_vsfy4"]
 [ext_resource type="PackedScene" uid="uid://c0qkguveh3wap" path="res://scenes/mechanisms/crumble_block.tscn" id="7_w53h0"]
 [ext_resource type="PackedScene" uid="uid://b63vekj6rqgso" path="res://scenes/pickups/coin.tscn" id="8_623cv"]
-[ext_resource type="PackedScene" uid="uid://8o4wqyvcflgr" path="res://scenes/powers/ice_bolt.tscn" id="9_u6gdm"]
+[ext_resource type="PackedScene" uid="uid://dd34i40mhtscy" path="res://scenes/enemies/goblin.tscn" id="9_u6gdm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sn7cj"]
 texture = ExtResource("1_03iei")
@@ -84,5 +84,8 @@ position = Vector2(-72, -775)
 [node name="BearTrap" parent="." unique_id=71900557 instance=ExtResource("5_623cv")]
 position = Vector2(72, -1000)
 
-[node name="IceBolt" parent="." unique_id=1470224442 instance=ExtResource("9_u6gdm")]
-position = Vector2(-38, -328)
+[node name="Goblin" parent="." unique_id=542388747 instance=ExtResource("9_u6gdm")]
+position = Vector2(104, -376)
+
+[node name="Goblin2" parent="." unique_id=1469624280 instance=ExtResource("9_u6gdm")]
+position = Vector2(-105, -328)
