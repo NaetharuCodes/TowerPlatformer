@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b63vekj6rqgso"]
 
 [ext_resource type="Texture2D" uid="uid://68ro06dp3tpg" path="res://assets/sprites/coin-Sheet.png" id="1_82xxr"]
+[ext_resource type="Script" uid="uid://dqr6leghu2ic6" path="res://scripts/pickups/coin.gd" id="1_sfxfy"]
+[ext_resource type="AudioStream" uid="uid://clkghxe7tuou2" path="res://assets/sounds/coin_sound.wav" id="3_rhl6v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqo0w"]
 radius = 3.0
@@ -71,6 +73,10 @@ animations = [{
 }]
 
 [node name="Coin" type="Area2D" unique_id=1558408723]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_sfxfy")
+sound = ExtResource("3_rhl6v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1328151488]
 shape = SubResource("CapsuleShape2D_hqo0w")
@@ -79,3 +85,5 @@ shape = SubResource("CapsuleShape2D_hqo0w")
 sprite_frames = SubResource("SpriteFrames_kuroa")
 autoplay = "default"
 frame_progress = 0.5367134
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

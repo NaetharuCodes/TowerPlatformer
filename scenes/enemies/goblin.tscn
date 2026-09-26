@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dd34i40mhtscy"]
 
 [ext_resource type="Texture2D" uid="uid://0vb68qc4k1wc" path="res://assets/sprites/goblin-Sheet.png" id="1_0rrhd"]
+[ext_resource type="Script" uid="uid://c4gck6xw0q2kr" path="res://scenes/enemies/goblin.gd" id="1_yeoui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
+size = Vector2(10, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yeoui"]
 atlas = ExtResource("1_0rrhd")
@@ -48,18 +52,39 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqo0w"]
-size = Vector2(10, 14)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kuroa"]
+size = Vector2(14, 16)
 
 [node name="Goblin" type="CharacterBody2D" unique_id=542388747]
 collision_layer = 4
 collision_mask = 3
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=365006176]
-sprite_frames = SubResource("SpriteFrames_kuroa")
-animation = &"normal"
-frame_progress = 0.31166127
+script = ExtResource("1_yeoui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=662146644]
 position = Vector2(0, 1.0000002)
 shape = SubResource("RectangleShape2D_hqo0w")
+
+[node name="Pivot" type="Node2D" parent="." unique_id=871457362]
+
+[node name="WallRay" type="RayCast2D" parent="Pivot" unique_id=1712396583]
+target_position = Vector2(12, 0)
+
+[node name="EdgeRay" type="RayCast2D" parent="Pivot" unique_id=2076246592]
+target_position = Vector2(0, 16)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot" unique_id=365006176]
+sprite_frames = SubResource("SpriteFrames_kuroa")
+animation = &"normal"
+frame_progress = 0.31166127
+flip_h = true
+
+[node name="SightRay" type="RayCast2D" parent="Pivot" unique_id=1460711974]
+target_position = Vector2(120, 0)
+collision_mask = 2
+
+[node name="Hitbox" type="Area2D" parent="Pivot" unique_id=1825273881]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Pivot/Hitbox" unique_id=324511017]
+shape = SubResource("RectangleShape2D_kuroa")

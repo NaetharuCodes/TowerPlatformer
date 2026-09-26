@@ -8,9 +8,15 @@ class_name IceBolt
 func _ready() -> void:
 	if direction == Vector2.LEFT:
 		sprite.flip_h = true
+	body_entered.connect(_on_body_entered)
 
 func _physics_process(delta: float) -> void:
 	position += direction * move_speed * delta
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 	queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.has_method("freeze"):
+		body.freeze()
+		queue_free()

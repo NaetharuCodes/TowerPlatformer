@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://drbjq40wtyfdc"]
+
+[ext_resource type="AudioStream" uid="uid://clkghxe7tuou2" path="res://assets/sounds/coin_sound.wav" id="2_n7lsv"]
+
+[sub_resource type="GDScript" id="GDScript_aybmh"]
+script/source = "extends Node
+
+const POOL_SIZE = 16
+var _players: Array[AudioStreamPlayer2D] = []
+"
+
+[node name="AudioManager" type="Node" unique_id=707112674]
+script = SubResource("GDScript_aybmh")
+
+[node name="coin_sound_player" type="AudioStreamPlayer2D" parent="." unique_id=1579612676]
+stream = ExtResource("2_n7lsv")
