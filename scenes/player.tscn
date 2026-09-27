@@ -96,8 +96,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
-size = Vector2(14, 14)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 7.0
+height = 14.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1515628199 groups=["player"]]
 collision_layer = 2
@@ -113,7 +114,7 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1242493755]
 texture_filter = 1
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_u8vuu")
+shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=2143215202]
 stream = ExtResource("3_qhqgy")

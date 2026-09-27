@@ -17,7 +17,7 @@ func game_over() -> void:
 func level_win(player_id: int) -> void:
 	game_state = GameState.WIN
 	winner = player_id
-	get_tree().change_scene_to_file("res://scenes/screens/win_screen.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/screens/win_screen.tscn")
 #	Load the win screen
 #	Show the winner on a podium
 # 	Show their time?

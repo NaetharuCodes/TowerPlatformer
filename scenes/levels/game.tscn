@@ -142,5 +142,6 @@ ice_bolt = ExtResource("6_7rg7d")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1793981946 groups=["coin"]]
 stream = ExtResource("6_limtx")
+autoplay = true
 
 [editable path="Viewports/RightSVPC/SubViewportRight/LevelOne"]

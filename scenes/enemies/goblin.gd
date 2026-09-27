@@ -82,9 +82,12 @@ func turn_around() -> void:
 	edge_ray.force_raycast_update()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if state == State.CHARGE and body.has_method("apply_knockback"):
+	if state == State.FROZEN or state == State.THAW:
+		return
+	if body.has_method("apply_knockback"):
 		body.apply_knockback(Vector2(knockback_force.x * direction, knockback_force.y))
-		set_state(State.RECOVER, recover_time)
+		if state == State.CHARGE:
+			set_state(State.RECOVER, recover_time)
 		
 func freeze() -> void:
 	sprite.position.x = 0.0
