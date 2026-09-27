@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d12tqsxeob37n"]
 
+[ext_resource type="Script" uid="uid://dcuysy7j51ih7" path="res://scenes/levels/game.gd" id="1_xmnyv"]
 [ext_resource type="Texture2D" uid="uid://bnvp4injtpi5i" path="res://assets/sprites/background.png" id="2_a1osm"]
 [ext_resource type="Texture2D" uid="uid://hkt14sdc4tn" path="res://assets/sprites/ui-frame.png" id="3_limtx"]
 [ext_resource type="Script" uid="uid://l312bg2bmyp0" path="res://scripts/level/camera_2d.gd" id="4_7rg7d"]
@@ -15,6 +16,7 @@ size = Vector2(16, 360)
 size = Vector2(16, 358)
 
 [node name="Game" type="Node2D" unique_id=322420430]
+script = ExtResource("1_xmnyv")
 
 [node name="World" type="Node" parent="." unique_id=862244062]
 
@@ -36,6 +38,33 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("3_limtx")
+
+[node name="PlayerOneScore" type="Label" parent="World/CanvasLayer/Control" unique_id=1088835023]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 157.0
+offset_right = 326.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 12
+text = "P1: 0"
+
+[node name="PlayerTwoScore" type="Label" parent="World/CanvasLayer/Control" unique_id=1472303685]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 173.0
+offset_right = 338.0
+offset_bottom = 196.0
+theme_override_font_sizes/font_size = 12
+text = "P2: 0"
+
+[node name="LevelTimer" type="Label" parent="World/CanvasLayer/Control" unique_id=409474286]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 189.0
+offset_right = 345.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 12
+text = "00:00:00"
 
 [node name="Viewports" type="Node" parent="." unique_id=99179476]
 
@@ -71,7 +100,7 @@ position = Vector2(144, 356)
 
 [node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("5_limtx")]
 texture_filter = 1
-position = Vector2(89, 27)
+position = Vector2(105, 332)
 ice_bolt = ExtResource("6_7rg7d")
 
 [node name="RightSVPC" type="SubViewportContainer" parent="Viewports" unique_id=104727210]
@@ -111,7 +140,7 @@ position = Vector2(194, 226)
 player_number = 2
 ice_bolt = ExtResource("6_7rg7d")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1793981946]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1793981946 groups=["coin"]]
 stream = ExtResource("6_limtx")
 
 [editable path="Viewports/RightSVPC/SubViewportRight/LevelOne"]

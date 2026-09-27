@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c64xd82blrgfd"]
+
+[ext_resource type="Texture2D" uid="uid://c8ctfjnkmxlxf" path="res://assets/sprites/win_screen.png" id="1_xjpxm"]
+
+[node name="WinScreen" type="Control" unique_id=736963771]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=484899963]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_xjpxm")

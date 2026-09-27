@@ -14,9 +14,6 @@ var reset: bool = false
 
 func _process(delta: float) -> void:
 	
-	print("Crumble: ", crumble)
-	print("Reset: ", reset)
-	
 	if crumble: 
 		
 		crumble_timer -= delta
