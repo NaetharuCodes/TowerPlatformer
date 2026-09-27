@@ -1,16 +1,26 @@
 extends Area2D
 class_name Dart
 
-@export var speed: float = 150.0
+enum Direction {LEFT, RIGHT}
+@export var direction = Direction.RIGHT
 
+@export var speed: float = 250.0
 
-func _ready() -> void:
-	print("New dart in play")
+@export var knockback_power: float = 250.0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x += speed * delta
+	if direction == Direction.RIGHT:
+		position.x += speed * delta
+	else:
+		position.x -= speed * delta
 
-func _on_body_entered(body: Node2D) -> void:
-	print("I entered the area of: ", body)
+func _on_body_entered(body: Player) -> void:
+	var knockback_vector: Vector2
+	
+	if direction == Direction.RIGHT:
+		knockback_vector = Vector2.RIGHT * knockback_power
+	else:
+		knockback_vector = Vector2.LEFT * knockback_power
+	
+	body.apply_knockback(knockback_vector)
 	queue_free()

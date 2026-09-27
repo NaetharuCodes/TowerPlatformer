@@ -8,9 +8,9 @@ var trap_state = TrapState.PRIMED
 func _ready() -> void:
 	sprite.play("idle")
 	
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Player) -> void:
 	
 	if trap_state == TrapState.PRIMED:
 		trap_state = TrapState.SPRUNG
-		print("you sprung the trap")
 		sprite.play("snap")
+		body.apply_immobile(2.0)

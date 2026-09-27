@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c0qkguveh3wap" path="res://scenes/mechanisms/crumble_block.tscn" id="7_w53h0"]
 [ext_resource type="PackedScene" uid="uid://b63vekj6rqgso" path="res://scenes/pickups/coin.tscn" id="8_623cv"]
 [ext_resource type="PackedScene" uid="uid://dd34i40mhtscy" path="res://scenes/enemies/goblin.tscn" id="9_u6gdm"]
+[ext_resource type="PackedScene" uid="uid://di1wfyuu6i0bi" path="res://scenes/traps/dart_shooter.tscn" id="10_a1u8d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sn7cj"]
 texture = ExtResource("1_03iei")
@@ -70,7 +71,7 @@ position = Vector2(8, -219)
 position = Vector2(-8, -312)
 
 [node name="Pendulum" parent="." unique_id=399202886 instance=ExtResource("3_vsfy4")]
-position = Vector2(-40, -447)
+position = Vector2(40, -432)
 
 [node name="Pendulum2" parent="." unique_id=990673626 instance=ExtResource("3_vsfy4")]
 position = Vector2(-25, -751)
@@ -89,3 +90,16 @@ position = Vector2(104, -376)
 
 [node name="Goblin2" parent="." unique_id=1469624280 instance=ExtResource("9_u6gdm")]
 position = Vector2(-105, -328)
+
+[node name="DartShooter" parent="." unique_id=2143644452 instance=ExtResource("10_a1u8d")]
+position = Vector2(-120, -88)
+
+[node name="BearTrap2" parent="." unique_id=1882295658 instance=ExtResource("5_623cv")]
+position = Vector2(25, -24)
+
+[node name="BuzzSaw3" parent="." unique_id=1880556859 instance=ExtResource("4_w53h0")]
+position = Vector2(88, -24)
+
+[node name="BuzzSaw4" parent="." unique_id=604513831 instance=ExtResource("4_w53h0")]
+position = Vector2(-104, -24)
+direction = 1

@@ -4,7 +4,6 @@ extends Area2D
 @export var dart: PackedScene
 var shot_timer = 0.0
 
-@export var move_speed: float = 100.0
 @export var viewport: SubViewport
 
 func _process(delta: float) -> void:

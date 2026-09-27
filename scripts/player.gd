@@ -52,6 +52,9 @@ var idle_timer: float = 0.0
 @export var ice_bolt_delay: float = 2.0
 var ice_bolt_timer = 0.0
 
+# Immobile Status
+var immobile_timer: float = 0.0
+
 
 func _physics_process(delta: float) -> void:
 	_move(delta)
@@ -62,6 +65,11 @@ func _action(action_name: String) -> String:
 	return "p%d_%s" % [player_number, action_name]
 
 func _move(delta: float) -> void:
+	
+	if immobile_timer > 0:
+		immobile_timer -= delta
+		return
+	
 	if knockback_timer > 0.0:
 		knockback_timer -= delta
 		velocity.y += gravity * delta
@@ -182,3 +190,6 @@ func _shoot_ice_bolt(delta: float) -> void:
 func apply_knockback(force: Vector2) -> void:
 	velocity = force
 	knockback_timer = knockback_time
+
+func apply_immobile(duration: float) -> void:
+	immobile_timer = duration

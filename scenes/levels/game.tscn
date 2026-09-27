@@ -98,6 +98,12 @@ shape = SubResource("RectangleShape2D_hqo0w")
 [node name="LevelOne" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1829633845 instance=ExtResource("4_a1osm")]
 position = Vector2(144, 356)
 
+[node name="Lava" parent="Viewports/LeftSVPContainer/SubViewportLeft/LevelOne" index="1" unique_id=1135130999]
+visible = false
+
+[node name="DartShooter" parent="Viewports/LeftSVPContainer/SubViewportLeft/LevelOne" index="19" unique_id=2143644452 node_paths=PackedStringArray("viewport")]
+viewport = NodePath("../..")
+
 [node name="Player" parent="Viewports/LeftSVPContainer/SubViewportLeft" unique_id=1515628199 instance=ExtResource("5_limtx")]
 texture_filter = 1
 position = Vector2(105, 332)
@@ -142,6 +148,6 @@ ice_bolt = ExtResource("6_7rg7d")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1793981946 groups=["coin"]]
 stream = ExtResource("6_limtx")
-autoplay = true
 
+[editable path="Viewports/LeftSVPContainer/SubViewportLeft/LevelOne"]
 [editable path="Viewports/RightSVPC/SubViewportRight/LevelOne"]
